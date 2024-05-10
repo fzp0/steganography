@@ -11,6 +11,9 @@ FetchContent_Declare(
 )
 FETCHCONTENT_MAKEAVAILABLE(fmt)
 
-add_executable(steganography main.cpp)
+add_executable(steganography main.cpp
+        read_picture.h
+        read_picture.cpp
+        dib_headers.h)
 target_link_libraries(steganography fmt)
 
