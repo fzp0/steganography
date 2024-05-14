@@ -26,8 +26,8 @@ struct BITMAPINFOHEADER {
     uint32_t header_size;
     int width;
     int height;
-    uint16_t num_color_planes;
-    uint16_t bits_per_pixel; // wikipedia says must be 1
+    uint16_t num_color_planes; // wikipedia says must be 1
+    uint16_t bytes_per_pixel;
     uint32_t compression_method;
     uint32_t raw_bitmap_data_size;
     int horizontal_resolution;

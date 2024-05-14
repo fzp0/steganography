@@ -9,7 +9,7 @@ FetchContent_Declare(
         GIT_REPOSITORY  https://github.com/fmtlib/fmt
         GIT_TAG         10.2.1
 )
-FETCHCONTENT_MAKEAVAILABLE(fmt)
+FetchContent_MakeAvailable(fmt)
 
 add_executable(steganography main.cpp
         read_picture.h
