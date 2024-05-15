@@ -22,14 +22,22 @@ namespace bmp_reader {
 
     };
 
+    struct color_table{
+        uint8_t red;
+        uint8_t green;
+        uint8_t blue;
+        uint8_t pad;
+    };
+
+
     struct bmp_data {
         file_header fileheader;
         dib_header dibheader;
         pixel_array pixelarray;
     };
 
-    void parse_header(std::ifstream& stream, file_header& header);
-    void parse_dib(std::ifstream& stream, dib_header& dib);
+    void parse_header(std::ifstream& stream, bmp_data& data);
+    void parse_dib(std::ifstream& stream, bmp_data& data);
 
 
     auto parse_bitmapinfoheader(std::ifstream& stream) -> BITMAPINFOHEADER;

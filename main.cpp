@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
     // handle arguments
     if(argc <= 1) {
         fmt::println("Insufficient arguments, execute program with -h flag to see the help menu");
+        exit(-1);
     }
 
 
