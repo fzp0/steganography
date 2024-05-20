@@ -34,6 +34,12 @@ auto bmp_reader::parse_bitmapinfoheader(std::ifstream &stream, bmp_data& data, b
         // Current offset from file start ->52 = 12 (bmp header) + 40 (DIB BITMAPINFOHEADER)
         //fmt::println("stream pos: {}", static_cast<int>(stream.tellg()));
     }
+
+    data.dibheader.width = header.width;
+    data.dibheader.height = header.height;
+    data.dibheader.num_color_planes = header.num_color_planes;
+    data.dibheader.bits_per_pixel = header.bits_per_pixel;
+
     if(header.compression_method != 0){
         fmt::println("Unsupported bitmap compression method: {}", header.compression_method);
         exit(-1);
@@ -56,6 +62,8 @@ auto bmp_reader::parse_bitmapinfoheader(std::ifstream &stream, bmp_data& data, b
 }
 
 
+
+
 // https://en.wikipedia.org/wiki/BMP_file_format#DIB_header_(bitmap_information_header)
 void bmp_reader::parse_dib(std::ifstream &stream, bmp_data &data, bool print) {
     auto& dib = data.dibheader;
@@ -67,11 +75,11 @@ void bmp_reader::parse_dib(std::ifstream &stream, bmp_data &data, bool print) {
 
     // no switch because initializing variables :(
     if(dib.dib_size == 12){ // BITMAPCOREHEADER OS21XBITMAPHEADER
-
+        if(print)fmt::println("DIB Header: BITMAPCOREHEADER");
     }else if(dib.dib_size == 16 || dib.dib_size == 64){ // OS22XBITMAPHEADER
 
     }else if(dib.dib_size == 40){ // BITMAPINFOHEADER
-        if(print)fmt::println("DIB Header: BITMAPINFOHEADER (size 40)");
+        if(print)fmt::println("DIB Header: BITMAPINFOHEADER");
         auto header = parse_bitmapinfoheader(stream,data, print);
     }else if(dib.dib_size == 52){ // BITMAPV2INFOHEADER
 

@@ -2,7 +2,7 @@
 #include <fmt/core.h>
 #include <filesystem>
 #include "read_picture.h"
-
+#include <SFML/Graphics/Image.hpp>
 
 
 void display_file_info(std::filesystem::path const& file) {
@@ -11,8 +11,25 @@ void display_file_info(std::filesystem::path const& file) {
     std::string extension = file.extension().string();
     if(extension == ".bmp"){
         fmt::println("Extension: {} - The BMP file format or bitmap,\nis a raster graphics image file format used to store bitmap digital images, independently of the display device\n(such as a graphics adapter), especially on Microsoft Windows[2] and OS/2[3] operating systems.", file.extension().string());
-        auto bmp_info = bmp_reader::read_bmp(file, true);
+        auto image = sf::Image();
+        image.loadFromFile(file.string());
+        auto sizevec = image.getSize();
+        fmt::println("BMP Width: {}, BMP Height: {}", sizevec.x, sizevec.y);
+
+        //auto bmp_info = bmp_reader::read_bmp(file, true);
     }
+    else if(extension == ".png"){
+        fmt::println("decompressing PNG file");
+        auto image = sf::Image();
+        image.loadFromFile(file.string());
+        auto sizevec = image.getSize();
+        fmt::println("PNG Width: {}, PNG Height: {}", sizevec.x, sizevec.y);
+        for(int i = 0; i < sizevec.x*sizevec.y; i++){
+            auto color = image.getPixel(i%sizevec.x,i/sizevec.x);
+            //fmt::println("Pixel[{}] color values: r{} g{} b{}", i, color.r, color.g, color.b);
+        }
+    }
+
     else if(extension == ".ppm"){
 
     }
