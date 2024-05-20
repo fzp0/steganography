@@ -11,7 +11,7 @@ void display_file_info(std::filesystem::path const& file) {
     std::string extension = file.extension().string();
     if(extension == ".bmp"){
         fmt::println("Extension: {} - The BMP file format or bitmap,\nis a raster graphics image file format used to store bitmap digital images, independently of the display device\n(such as a graphics adapter), especially on Microsoft Windows[2] and OS/2[3] operating systems.", file.extension().string());
-        auto bmp_info = bmp_reader::read_bmp(file);
+        auto bmp_info = bmp_reader::read_bmp(file, true);
     }
     else if(extension == ".ppm"){
 

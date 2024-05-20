@@ -14,13 +14,14 @@ namespace bmp_reader {
         uintptr_t array_offset;
     };
 
-    struct dib_header {
+    struct dib_header { // shared data in every bitmap header
         uint32_t dib_size;
+        int width;
+        int height;
+        int num_color_planes;
+        int bits_per_pixel;
     };
 
-    struct pixel_array {
-
-    };
 
     struct color_table{
         uint8_t red;
@@ -33,15 +34,16 @@ namespace bmp_reader {
     struct bmp_data {
         file_header fileheader;
         dib_header dibheader;
-        pixel_array pixelarray;
+        std::vector<color_table> colortable;
+        void* pixelarray;
     };
 
-    void parse_header(std::ifstream& stream, bmp_data& data);
-    void parse_dib(std::ifstream& stream, bmp_data& data);
+    void parse_header(std::ifstream& stream, bmp_data& data, bool print);
+    void parse_dib(std::ifstream& stream, bmp_data& data, bool print);
 
+    auto parse_bitmapcoreheader(std::ifstream& stream, bmp_data& data, bool print) -> BITMAPCOREHEADER;
+    auto parse_bitmapinfoheader(std::ifstream& stream, bmp_data& data, bool print) -> BITMAPINFOHEADER;
 
-    auto parse_bitmapinfoheader(std::ifstream& stream) -> BITMAPINFOHEADER;
-
-    auto read_bmp(std::filesystem::path const& file) -> bmp_data;
+    auto read_bmp(std::filesystem::path const& file, bool print) -> bmp_data;
 }
 
