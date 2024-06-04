@@ -25,6 +25,10 @@ FetchContent_MakeAvailable(SFML)
 add_executable(steganography main.cpp
         read_picture.h
         read_picture.cpp
-        dib_headers.h)
+        dib_headers.h
+        info_grabber.h
+        info_grabber.cpp
+        image_writer.cpp
+        image_writer.h)
 target_link_libraries(steganography fmt sfml-graphics)
 
