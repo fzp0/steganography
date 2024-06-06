@@ -55,11 +55,9 @@ void info_grabber::display_image_info(std::filesystem::path const &file) {
         fmt::println("Extension: .pic - PICtor is an image file format developed by John Bridges, the principal author of PCPaint, the first Paintbrush program for the PC. It was also the native file format for Pictor Paint and Graphics Animation System for Professionals (GRASP) (also by Bridges) and became the first widely accepted DOS imaging standard.");
         print_image_width_height(image);
     }
-    else if(extension == ".ppm"){
-
-    }
-    else if(extension == ".pgm"){
-
+    else if(extension == ".pnm"){
+        fmt::println("Extension: .pnm - Simple uncompressed raster image file format, associated with the Netpbm library and suite of image processing utilities. It is designed so that it is straightforward for programmers to import and export them.");
+        print_image_width_height(image);
     }
     else{
         fmt::println("Unsupported File Extension: {}", file.extension().string());
